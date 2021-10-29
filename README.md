@@ -1,64 +1,33 @@
 # Amazon Vine Analysis
 
-> Analyzing Amazon reviews written by members of the paid Amazon Vine program https://www.amazon.com/gp/vine/help.
+## Overview
+PySpark, AWS, and Postgres were used to analyze Amazon reviews for Office Products to determine if reviews from Amazon Vine members are biased.
+The Office Products dataset was chosen from Amazon and an analysis was conducted using PySpark to perform the ETL process, connect to an AWS RDS instance, and to load the transformed data into pgAdmin. PySpark was also used to analyze the dataset and determine the bias towards favorable reviews from Amazon Vine members.
 
-## Objective
-
-Like the majority of shoppers, Amazon's shoppers depend on product reviews to make a purchase decisions. Amazon makes their vine review datasets publicly available https://s3.amazonaws.com/amazon-reviews-pds/tsv/index.txt. Vine reviews are quite large and can exceed the capacity of local machines to handle; hence, we are using Spark and AWS.
-
-The first goal for this assignment will be to perform the ETL process completely in the cloud and upload a DataFrame to an RDS instance. The second goal will be to use PySpark to perform a statistical analysis of selected data.
-
-Technologies Used:
-AWS RDS S3
-Python
-PySpark
-Jupyter Notebooks
-
-## Analysis Overview
-This project analyzes Amazon Vine program and determines if there is a bias toward favorable reviews from Vine members.\
-The analysis uses PySpark to perform the ETL process to extract the dataset, transform the data, connect to an AWS RDS instance, load the transformed data into pgAdmin and calculate different metrics.\
-We focused on the US reviews for video games.
-
-## Resources
-- Data Source: [Amazon Review datasets](https://s3.amazonaws.com/amazon-reviews-pds/tsv/index.txt), [Video Games Review dataset](https://s3.amazonaws.com/amazon-reviews-pds/tsv/amazon_reviews_us_Video_Games_v1_00.tsv.gz)
 
 ## Results
-### Total number of reviews
-- Vine reviews <p align="center">
-    <img src="https://user-images.githubusercontent.com/68669675/99216761-18d62180-279c-11eb-9190-f5af7b8039ad.png"> 
-</p>
 
-<br>
+### In the Amazon Office Products Reviews dataset:
 
-- Non-Vine reviews <p align="center">
-    <img src="https://user-images.githubusercontent.com/68669675/99216760-17a4f480-279c-11eb-87a8-733eb08893d7.png"> 
-</p>
-<br>
+* **969** reviews were from Amazon Vine members
+* **43,745** reviews were not from Amazon Vine members
+![vine_reviews](https://user-images.githubusercontent.com/64225504/139511176-dac3aee8-2839-4e7d-8226-ea85498d90d3.png)
 
-### Total number of 5-star reviews
-- Vine reviews <p align="center">
-    <img src="https://user-images.githubusercontent.com/68669675/99217107-e678f400-279c-11eb-9523-a2f5ef938070.png"> 
-</p>
 
-<br>
 
-- Non-Vine reviews <p align="center">
-    <img src="https://user-images.githubusercontent.com/68669675/99217109-e7118a80-279c-11eb-93e8-4ea595a723e2.png"> 
-</p>
-<br>
 
-### Percentage of 5-star reviews
-- Vine reviews <p align="center">
-    <img src="https://user-images.githubusercontent.com/68669675/99217345-77e86600-279d-11eb-89ce-5704117874da.png"> 
-</p>
+* Of the 969 reviews from Amazon Vine members, there were **430** 5-star reviews
+* Of the 43,745 reviews not from Amazon Vine members, there were **19** 5-star reviews
+![five_star_reviews](https://user-images.githubusercontent.com/64225504/139511185-47cf5642-d9a9-4bfe-a092-60f435d66d5f.png)
 
-<br>
 
-- Non-Vine reviews <p align="center">
-    <img src="https://user-images.githubusercontent.com/68669675/99217349-79199300-279d-11eb-826d-18001d7e6b68.png"> 
-</p>
-<br>
+
+* **44%** of reviews by Amazon Vine members were 5 stars 
+* **44%** of reviews not by Amazon Vine members were 5 stars
+![five_star_percentage](https://user-images.githubusercontent.com/64225504/139511196-f87a1402-0bc7-4a08-bd5e-967cdc975698.png)
+
+
+
 
 ## Summary
-51% of the reviews in the Vine program were 5 stars reviews whereas the percentage in the non-Vine reviews is only 39%. This describes a positivity bias for reviews in the Vine program.\
-Additionally we could analyse the statistical distribution (mean, median and mode) of the star rating for the Vine and non-Vine reviews.
+Comparing the percentage of reviews that were 5 stars from both Amazon Vine members and not Amazon Vine members, it can be concluded that there is no positivity bias for reviews of Office Products in the Vine program. The percentage of five-star reviews from both groups are nearly the same, rounded to 44%. A similar analysis could be conducted to compare the one-star or low reviews from both Vine and non-Vine members to further support this conclusion.
